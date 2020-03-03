@@ -1,0 +1,6 @@
+-c --cpu Cortex-M4.fp.sp -D__EVAL -g -O0 --apcs=interwork -I ..\..\..\.. --c99
+-IC:\Keil_v5\ARM\RV31\INC
+-IC:\Keil_v5\ARM\CMSIS\Include
+-IC:\Keil_v5\ARM\INC\TI\TM4C123
+-D__UVISION_VERSION="529" -Drvmdk -DPART_TM4C123GH6PM -DTM4C123GH6PM
+-o .\objects\my_switch_extra.o --omf_browse .\objects\my_switch_extra.crf --depend .\objects\my_switch_extra.d "my_switch_extra.c"
