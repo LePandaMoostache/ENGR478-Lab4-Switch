@@ -1,7 +1,6 @@
 #include <stdint.h>
 #include "inc/tm4c123gh6pm.h"
 
-
 #define 	RED_MASK 		0x02	// PF1, 2^1 = 2
 #define   BLUE_MASK   0x04	// PF2, 2^2 = 4 
 #define   GREEN_MASK  0x08	// PF3, 2^3 = 8
@@ -39,8 +38,7 @@ PortFunctionInit(void)
 void
 SW2Function(void)
 {
-		// Unlock GPIO Port F
-		GPIO_PORTF_LOCK_R = 0x4C4F434B;   // Convert to ASCII -> "LOCK"
+
 		GPIO_PORTF_CR_R |= SW2;           // allow changes to PF0
 
     // Set the direction of PF2 (red LED) as output
@@ -91,8 +89,32 @@ int main(void)
 
     while(1)
     {
-			
-				if((GPIO_PORTF_DATA_R&SW2)!=0x00) // Is SW1 is currently NOT pressed?
+
+				/*
+				if((GPIO_PORTF_DATA_R&SW2 && GPIO_PORTF_DATA_R&SW1) !=0x00) // Turn red and green ON
+				{
+				GPIO_PORTF_DATA_R |= GREEN_MASK;
+				GPIO_PORTF_DATA_R |= RED_MASK;
+						
+				}
+				else if((GPIO_PORTF_DATA_R&SW1) !=0x00) // SW1 NOT Pressed?
+				{
+						// Turn OFF the RED LED.
+						GPIO_PORTF_DATA_R &= ~RED_MASK;
+				}
+				else if((GPIO_PORTF_DATA_R&SW2) !=0x00) // SW2 NOT Pressed?
+				{
+						// Turn OFF the GREEN LED.
+						GPIO_PORTF_DATA_R &= ~GREEN_MASK;
+				}
+				else
+				{
+						// Turn OFF the LED.
+						GPIO_PORTF_DATA_R |= 0x00;
+				}	
+				*/
+				
+				if((GPIO_PORTF_DATA_R&SW2)!=0x00) // Is SW2 currently NOT pressed?
 				{
 						// Turn ON the LED.
 						GPIO_PORTF_DATA_R |= RED_MASK;
@@ -103,19 +125,6 @@ int main(void)
 						// Turn OFF the LED.
 						GPIO_PORTF_DATA_R &= ~RED_MASK;
 				}
-
-				
-				if((GPIO_PORTF_DATA_R&SW1)!=0x00) // Is SW1 is currently NOT pressed?
-				{
-						// Turn ON the LED.
-						GPIO_PORTF_DATA_R |= GREEN_MASK;
-				}
-				else
-				{
-						// Turn OFF the LED.
-						GPIO_PORTF_DATA_R &= ~GREEN_MASK;
-				}
-				
 				
     }
 }
