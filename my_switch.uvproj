@@ -432,9 +432,9 @@
               <FilePath>..\..\..\..\driverlib\rvmdk\driverlib.lib</FilePath>
             </File>
             <File>
-              <FileName>my_switch.c</FileName>
+              <FileName>my_switch_extra.c</FileName>
               <FileType>1</FileType>
-              <FilePath>.\my_switch.c</FilePath>
+              <FilePath>.\my_switch_extra.c</FilePath>
             </File>
           </Files>
         </Group>
