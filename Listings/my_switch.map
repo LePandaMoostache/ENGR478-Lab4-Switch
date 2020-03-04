@@ -22,7 +22,7 @@ Section Cross References
     __rtentry2.o(.ARM.Collect$$rtentry$$00000008) refers to boardinit2.o(.text) for _platform_post_stackheap_init
     __rtentry2.o(.ARM.Collect$$rtentry$$0000000A) refers to libinit.o(.ARM.Collect$$libinit$$00000000) for __rt_lib_init
     __rtentry2.o(.ARM.Collect$$rtentry$$0000000B) refers to boardinit3.o(.text) for _platform_post_lib_init
-    __rtentry2.o(.ARM.Collect$$rtentry$$0000000D) refers to my_switch.o(.text) for main
+    __rtentry2.o(.ARM.Collect$$rtentry$$0000000D) refers to my_switch_extra.o(.text) for main
     __rtentry2.o(.ARM.Collect$$rtentry$$0000000D) refers to exit.o(.text) for exit
     __rtentry2.o(.ARM.exidx) refers to __rtentry2.o(.ARM.Collect$$rtentry$$00000001) for .ARM.Collect$$rtentry$$00000001
     __rtentry2.o(.ARM.exidx) refers to __rtentry2.o(.ARM.Collect$$rtentry$$00000008) for .ARM.Collect$$rtentry$$00000008
@@ -170,7 +170,7 @@ Image Symbol Table
     ../clib/stdlib.c                         0x00000000   Number         0  exit.o ABSOLUTE
     ../fplib/fpinit.s                        0x00000000   Number         0  fpinit.o ABSOLUTE
     dc.s                                     0x00000000   Number         0  dc.o ABSOLUTE
-    my_switch.c                              0x00000000   Number         0  my_switch.o ABSOLUTE
+    my_switch_extra.c                        0x00000000   Number         0  my_switch_extra.o ABSOLUTE
     startup_rvmdk.S                          0x00000000   Number         0  startup_rvmdk.o ABSOLUTE
     $v0                                      0x0000026c   Number         0  startup_rvmdk.o(RESET)
     NmiSR                                    0x00000281   Thumb Code     0  startup_rvmdk.o(RESET)
@@ -222,16 +222,16 @@ Image Symbol Table
     .ARM.Collect$$rtexit$$00000004           0x00000304   Section        6  rtexit2.o(.ARM.Collect$$rtexit$$00000004)
     .text                                    0x0000030c   Section       24  startup_rvmdk.o(.text)
     $v0                                      0x0000030c   Number         0  startup_rvmdk.o(.text)
-    .text                                    0x00000324   Section        0  my_switch.o(.text)
-    .text                                    0x000003cc   Section        0  heapauxi.o(.text)
-    .text                                    0x000003d2   Section       74  sys_stackheap_outer.o(.text)
-    .text                                    0x0000041c   Section        0  exit.o(.text)
-    .text                                    0x00000430   Section        8  libspace.o(.text)
-    .text                                    0x00000438   Section        0  sys_exit.o(.text)
-    .text                                    0x00000444   Section        2  use_no_semi.o(.text)
-    .text                                    0x00000446   Section        0  indicate_semi.o(.text)
-    x$fpl$fpinit                             0x00000446   Section       10  fpinit.o(x$fpl$fpinit)
-    $v0                                      0x00000446   Number         0  fpinit.o(x$fpl$fpinit)
+    .text                                    0x00000324   Section        0  my_switch_extra.o(.text)
+    .text                                    0x0000047c   Section        0  heapauxi.o(.text)
+    .text                                    0x00000482   Section       74  sys_stackheap_outer.o(.text)
+    .text                                    0x000004cc   Section        0  exit.o(.text)
+    .text                                    0x000004e0   Section        8  libspace.o(.text)
+    .text                                    0x000004e8   Section        0  sys_exit.o(.text)
+    .text                                    0x000004f4   Section        2  use_no_semi.o(.text)
+    .text                                    0x000004f6   Section        0  indicate_semi.o(.text)
+    x$fpl$fpinit                             0x000004f6   Section       10  fpinit.o(x$fpl$fpinit)
+    $v0                                      0x000004f6   Number         0  fpinit.o(x$fpl$fpinit)
     .bss                                     0x20000000   Section       96  libspace.o(.bss)
     HEAP                                     0x20000060   Section        0  startup_rvmdk.o(HEAP)
     STACK                                    0x20000060   Section      256  startup_rvmdk.o(STACK)
@@ -243,7 +243,7 @@ Image Symbol Table
     Symbol Name                              Value     Ov Type        Size  Object(Section)
 
     BuildAttributes$$THM_ISAv4$E$P$D$K$B$S$7EM$VFPi3$EXTD16$VFPS$VFMA$PE$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OSPACE$ROPI$EBA8$UX$STANDARDLIB$REQ8$PRES8$EABIv2 0x00000000   Number         0  anon$$obj.o ABSOLUTE
-    __ARM_use_no_argv                        0x00000000   Number         0  my_switch.o ABSOLUTE
+    __ARM_use_no_argv                        0x00000000   Number         0  my_switch_extra.o ABSOLUTE
     __Vectors                                0x00000000   Data           0  startup_rvmdk.o(RESET)
     __ARM_exceptions_init                     - Undefined Weak Reference
     __alloca_initialize                       - Undefined Weak Reference
@@ -322,25 +322,27 @@ Image Symbol Table
     __rt_exit_prels_1                        0x00000301   Thumb Code     0  rtexit2.o(.ARM.Collect$$rtexit$$00000002)
     __rt_exit_exit                           0x00000305   Thumb Code     0  rtexit2.o(.ARM.Collect$$rtexit$$00000004)
     __user_initial_stackheap                 0x0000030d   Thumb Code     0  startup_rvmdk.o(.text)
-    PortFunctionInit                         0x00000325   Thumb Code    90  my_switch.o(.text)
-    main                                     0x0000037f   Thumb Code    54  my_switch.o(.text)
-    __use_two_region_memory                  0x000003cd   Thumb Code     2  heapauxi.o(.text)
-    __rt_heap_escrow$2region                 0x000003cf   Thumb Code     2  heapauxi.o(.text)
-    __rt_heap_expand$2region                 0x000003d1   Thumb Code     2  heapauxi.o(.text)
-    __user_setup_stackheap                   0x000003d3   Thumb Code    74  sys_stackheap_outer.o(.text)
-    exit                                     0x0000041d   Thumb Code    18  exit.o(.text)
-    __user_libspace                          0x00000431   Thumb Code     8  libspace.o(.text)
-    __user_perproc_libspace                  0x00000431   Thumb Code     0  libspace.o(.text)
-    __user_perthread_libspace                0x00000431   Thumb Code     0  libspace.o(.text)
-    _sys_exit                                0x00000439   Thumb Code     8  sys_exit.o(.text)
-    __I$use$semihosting                      0x00000445   Thumb Code     0  use_no_semi.o(.text)
-    __use_no_semihosting_swi                 0x00000445   Thumb Code     2  use_no_semi.o(.text)
-    __semihosting_library_function           0x00000447   Thumb Code     0  indicate_semi.o(.text)
-    _fp_init                                 0x00000447   Thumb Code    10  fpinit.o(x$fpl$fpinit)
-    __fplib_config_fpu_vfp                   0x0000044f   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    __fplib_config_pureend_doubles           0x0000044f   Thumb Code     0  fpinit.o(x$fpl$fpinit)
-    Region$$Table$$Base                      0x00000450   Number         0  anon$$obj.o(Region$$Table)
-    Region$$Table$$Limit                     0x00000460   Number         0  anon$$obj.o(Region$$Table)
+    PortFunctionInit                         0x00000325   Thumb Code    24  my_switch_extra.o(.text)
+    SW2Function                              0x0000033d   Thumb Code    72  my_switch_extra.o(.text)
+    SW1Function                              0x00000385   Thumb Code    72  my_switch_extra.o(.text)
+    main                                     0x000003cd   Thumb Code   152  my_switch_extra.o(.text)
+    __use_two_region_memory                  0x0000047d   Thumb Code     2  heapauxi.o(.text)
+    __rt_heap_escrow$2region                 0x0000047f   Thumb Code     2  heapauxi.o(.text)
+    __rt_heap_expand$2region                 0x00000481   Thumb Code     2  heapauxi.o(.text)
+    __user_setup_stackheap                   0x00000483   Thumb Code    74  sys_stackheap_outer.o(.text)
+    exit                                     0x000004cd   Thumb Code    18  exit.o(.text)
+    __user_libspace                          0x000004e1   Thumb Code     8  libspace.o(.text)
+    __user_perproc_libspace                  0x000004e1   Thumb Code     0  libspace.o(.text)
+    __user_perthread_libspace                0x000004e1   Thumb Code     0  libspace.o(.text)
+    _sys_exit                                0x000004e9   Thumb Code     8  sys_exit.o(.text)
+    __I$use$semihosting                      0x000004f5   Thumb Code     0  use_no_semi.o(.text)
+    __use_no_semihosting_swi                 0x000004f5   Thumb Code     2  use_no_semi.o(.text)
+    __semihosting_library_function           0x000004f7   Thumb Code     0  indicate_semi.o(.text)
+    _fp_init                                 0x000004f7   Thumb Code    10  fpinit.o(x$fpl$fpinit)
+    __fplib_config_fpu_vfp                   0x000004ff   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    __fplib_config_pureend_doubles           0x000004ff   Thumb Code     0  fpinit.o(x$fpl$fpinit)
+    Region$$Table$$Base                      0x00000500   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x00000510   Number         0  anon$$obj.o(Region$$Table)
     __libspace_start                         0x20000000   Data          96  libspace.o(.bss)
     __temporary_stack_top$libspace           0x20000060   Data           0  libspace.o(.bss)
 
@@ -352,9 +354,9 @@ Memory Map of the image
 
   Image Entry point : 0x0000026d
 
-  Load Region LR_1 (Base: 0x00000000, Size: 0x00000460, Max: 0xffffffff, ABSOLUTE)
+  Load Region LR_1 (Base: 0x00000000, Size: 0x00000510, Max: 0xffffffff, ABSOLUTE)
 
-    Execution Region ER_RO (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00000460, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RO (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00000510, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -405,25 +407,25 @@ Memory Map of the image
     0x00000304   0x00000304   0x00000006   Code   RO          115    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
     0x0000030a   0x0000030a   0x00000002   PAD
     0x0000030c   0x0000030c   0x00000018   Code   RO            4    .text               startup_rvmdk.o
-    0x00000324   0x00000324   0x000000a8   Code   RO           11    .text               my_switch.o
-    0x000003cc   0x000003cc   0x00000006   Code   RO           32    .text               c_w.l(heapauxi.o)
-    0x000003d2   0x000003d2   0x0000004a   Code   RO           52    .text               c_w.l(sys_stackheap_outer.o)
-    0x0000041c   0x0000041c   0x00000012   Code   RO           54    .text               c_w.l(exit.o)
-    0x0000042e   0x0000042e   0x00000002   PAD
-    0x00000430   0x00000430   0x00000008   Code   RO           62    .text               c_w.l(libspace.o)
-    0x00000438   0x00000438   0x0000000c   Code   RO          123    .text               c_w.l(sys_exit.o)
-    0x00000444   0x00000444   0x00000002   Code   RO          134    .text               c_w.l(use_no_semi.o)
-    0x00000446   0x00000446   0x00000000   Code   RO          136    .text               c_w.l(indicate_semi.o)
-    0x00000446   0x00000446   0x0000000a   Code   RO          121    x$fpl$fpinit        fz_wm.l(fpinit.o)
-    0x00000450   0x00000450   0x00000010   Data   RO          189    Region$$Table       anon$$obj.o
+    0x00000324   0x00000324   0x00000158   Code   RO           11    .text               my_switch_extra.o
+    0x0000047c   0x0000047c   0x00000006   Code   RO           32    .text               c_w.l(heapauxi.o)
+    0x00000482   0x00000482   0x0000004a   Code   RO           52    .text               c_w.l(sys_stackheap_outer.o)
+    0x000004cc   0x000004cc   0x00000012   Code   RO           54    .text               c_w.l(exit.o)
+    0x000004de   0x000004de   0x00000002   PAD
+    0x000004e0   0x000004e0   0x00000008   Code   RO           62    .text               c_w.l(libspace.o)
+    0x000004e8   0x000004e8   0x0000000c   Code   RO          123    .text               c_w.l(sys_exit.o)
+    0x000004f4   0x000004f4   0x00000002   Code   RO          134    .text               c_w.l(use_no_semi.o)
+    0x000004f6   0x000004f6   0x00000000   Code   RO          136    .text               c_w.l(indicate_semi.o)
+    0x000004f6   0x000004f6   0x0000000a   Code   RO          121    x$fpl$fpinit        fz_wm.l(fpinit.o)
+    0x00000500   0x00000500   0x00000010   Data   RO          189    Region$$Table       anon$$obj.o
 
 
-    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x00000460, Size: 0x00000000, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_RW (Exec base: 0x20000000, Load base: 0x00000510, Size: 0x00000000, Max: 0xffffffff, ABSOLUTE)
 
     **** No section assigned to this execution region ****
 
 
-    Execution Region ER_ZI (Exec base: 0x20000000, Load base: 0x00000460, Size: 0x00000160, Max: 0xffffffff, ABSOLUTE)
+    Execution Region ER_ZI (Exec base: 0x20000000, Load base: 0x00000510, Size: 0x00000160, Max: 0xffffffff, ABSOLUTE)
 
     Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
 
@@ -439,11 +441,11 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       168         24          0          0          0       5572   my_switch.o
+       344         24          0          0          0       5968   my_switch_extra.o
        672        636          0          0        256        556   startup_rvmdk.o
 
     ----------------------------------------------------------------------
-       840        660         16          0        256       6128   Object Totals
+      1016        660         16          0        256       6524   Object Totals
          0          0         16          0          0          0   (incl. Generated)
          0          0          0          0          0          0   (incl. Padding)
 
@@ -493,15 +495,15 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      1104        676         16          0        352       6704   Grand Totals
-      1104        676         16          0        352       6704   ELF Image Totals
-      1104        676         16          0          0          0   ROM Totals
+      1280        676         16          0        352       7100   Grand Totals
+      1280        676         16          0        352       7100   ELF Image Totals
+      1280        676         16          0          0          0   ROM Totals
 
 ==============================================================================
 
-    Total RO  Size (Code + RO Data)                 1120 (   1.09kB)
+    Total RO  Size (Code + RO Data)                 1296 (   1.27kB)
     Total RW  Size (RW Data + ZI Data)               352 (   0.34kB)
-    Total ROM Size (Code + RO Data + RW Data)       1120 (   1.09kB)
+    Total ROM Size (Code + RO Data + RW Data)       1296 (   1.27kB)
 
 ==============================================================================
 
